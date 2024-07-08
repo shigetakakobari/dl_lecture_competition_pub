@@ -42,6 +42,7 @@ def run(args: DictConfig):
     model = BasicConvClassifier(
         train_set.num_classes, train_set.seq_len, train_set.num_channels
     ).to(args.device)
+    #(train_set.num_classes, train_set.seq_len, train_set.num_channels) = (1854, 281, 271)
 
     # ------------------
     #     Optimizer
