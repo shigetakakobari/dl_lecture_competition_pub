@@ -57,7 +57,7 @@ def run(args: DictConfig):
         task="multiclass", num_classes=train_set.num_classes, top_k=10
     ).to(args.device)
       
-    for epoch in range(args.epochs):
+    for epoch in range(30):
         print(f"Epoch {epoch+1}/{args.epochs}")
         
         train_loss, train_acc, val_loss, val_acc = [], [], [], []
