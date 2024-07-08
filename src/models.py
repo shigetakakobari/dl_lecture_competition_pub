@@ -53,10 +53,12 @@ class ConvBlock(nn.Module):
         self.conv0 = nn.Conv1d(in_dim, out_dim, kernel_size, padding="same")
         self.conv1 = nn.Conv1d(out_dim, out_dim, kernel_size, padding="same")
         self.conv2 = nn.Conv1d(out_dim, out_dim, kernel_size, padding="same")
+        self.conv3 = nn.Conv1d(out_dim, out_dim, kernel_size, padding="same")
         
         self.batchnorm0 = nn.BatchNorm1d(num_features=out_dim)
         self.batchnorm1 = nn.BatchNorm1d(num_features=out_dim)
         self.batchnorm2 = nn.BatchNorm1d(num_features=out_dim)
+        self.batchnorm3 = nn.BatchNorm1d(num_features=out_dim)
 
         self.dropout = nn.Dropout(p_drop)
 
@@ -74,5 +76,8 @@ class ConvBlock(nn.Module):
         X = self.conv2(X) + X
         X = F.gelu(self.batchnorm2(X))
         #X = F.glu(X, dim=-2)
+
+        X = self.conv3(X) + X
+        X = F.gelu(self.batchnorm3(X))
 
         return self.dropout(X)
